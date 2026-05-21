@@ -1,0 +1,684 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: oklch(0.98 0.005 240);
+  --foreground: oklch(0.15 0.02 240);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 240);
+  --primary: oklch(0.55 0.18 250);
+  --primary-foreground: oklch(0.99 0.005 240);
+  --secondary: oklch(0.93 0.015 240);
+  --secondary-foreground: oklch(0.2 0.03 240);
+  --muted: oklch(0.95 0.01 240);
+  --muted-foreground: oklch(0.5 0.02 240);
+  --accent: oklch(0.93 0.015 240);
+  --accent-foreground: oklch(0.2 0.03 240);
+  --destructive: oklch(0.6 0.18 20);
+  --border: oklch(0.9 0.01 240);
+  --input: oklch(0.9 0.01 240);
+  --ring: oklch(0.55 0.18 250 / 0.5);
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-none;
+  }
+  body {
+    @apply bg-background text-foreground min-h-screen font-sans;
+    background-image: radial-gradient(at 0% 0%, oklch(0.93 0.03 250 / 0.4) 0px, transparent 50%),
+                      radial-gradient(at 100% 100%, oklch(0.93 0.03 290 / 0.3) 0px, transparent 50%);
+  }
+}
+
+.chat-widget-fab {
+  @apply fixed bottom-6 right-6 w-14 h-14 rounded-full bg-primary text-primary-foreground shadow-lg flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-110 active:scale-95 z-50;
+  box-shadow: 0 8px 30px oklch(0.55 0.18 250 / 0.3);
+}
+
+.chat-widget-panel {
+  @apply fixed bottom-24 right-6 w-96 h-[500px] rounded-2xl border border-border bg-card shadow-2xl flex flex-col overflow-hidden z-50 transition-all duration-300 animate-in fade-in slide-in-from-bottom-5;
+  box-shadow: 0 12px 40px oklch(0.15 0.02 240 / 0.1);
+}
+
+.chat-widget-header {
+  @apply px-4 py-3 bg-primary text-primary-foreground flex items-center justify-between;
+}
+
+.chat-widget-header-info {
+  @apply flex items-center gap-2 font-semibold;
+}
+
+.chat-widget-close {
+  @apply text-primary-foreground/80 hover:text-primary-foreground transition-colors cursor-pointer;
+}
+
+.chat-intro {
+  @apply p-6 flex flex-col justify-center h-full;
+}
+
+.chat-intro-title {
+  @apply text-2xl font-bold text-foreground mb-1;
+}
+
+.chat-intro-subtitle {
+  @apply text-sm text-muted-foreground mb-6;
+}
+
+.chat-intro-form {
+  @apply flex flex-col gap-4;
+}
+
+.chat-input-field {
+  @apply w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:border-primary focus:ring-2 focus:ring-ring transition-all text-sm;
+}
+
+.chat-textarea-field {
+  @apply w-full px-4 py-2.5 rounded-lg border border-border bg-background focus:border-primary focus:ring-2 focus:ring-ring transition-all text-sm resize-none;
+}
+
+.chat-start-btn {
+  @apply w-full py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 active:scale-98 transition-all cursor-pointer;
+}
+
+.chat-window {
+  @apply flex flex-col flex-1 h-full overflow-hidden;
+}
+
+.chat-connected-bar {
+  @apply px-4 py-2 bg-secondary text-secondary-foreground text-xs flex items-center justify-between border-b border-border;
+}
+
+.chat-end-btn {
+  @apply px-2.5 py-1 rounded bg-destructive text-primary-foreground hover:opacity-90 transition-opacity text-[10px] uppercase font-bold tracking-wider cursor-pointer;
+}
+
+.chat-queue-bar {
+  @apply px-4 py-2 bg-yellow-500/10 text-yellow-600 text-xs text-center font-medium border-b border-yellow-500/20;
+}
+
+.chat-messages {
+  @apply flex-1 p-4 overflow-y-auto flex flex-col gap-3 bg-slate-50/50;
+}
+
+.message-bubble {
+  @apply max-w-[80%] p-3 rounded-2xl text-sm flex flex-col gap-0.5 animate-in fade-in duration-200;
+}
+
+.message-system {
+  @apply max-w-full bg-transparent text-muted-foreground text-xs text-center self-center py-1 border-none shadow-none;
+}
+
+.message-system .message-sender,
+.message-system .message-time {
+  @apply hidden;
+}
+
+.message-customer {
+  @apply self-end bg-primary text-primary-foreground rounded-tr-none;
+}
+
+.message-staff {
+  @apply self-start bg-white text-foreground border border-border rounded-tl-none shadow-sm;
+}
+
+.message-sender {
+  @apply text-[10px] font-bold opacity-75 uppercase tracking-wider;
+}
+
+.message-time {
+  @apply text-[9px] opacity-60 self-end mt-0.5;
+}
+
+.chat-typing-indicator {
+  @apply self-start bg-white border border-border rounded-2xl rounded-tl-none px-4 py-3 flex gap-1 items-center shadow-sm;
+}
+
+.chat-typing-indicator span {
+  @apply w-1.5 h-1.5 bg-muted-foreground rounded-full animate-bounce;
+}
+
+.chat-typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.chat-typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.chat-input-bar {
+  @apply p-3 border-t border-border bg-white flex gap-2 items-center;
+}
+
+.chat-input-text {
+  @apply flex-1 px-4 py-2 rounded-lg border border-border bg-background focus:border-primary text-sm transition-all;
+}
+
+.chat-send-btn {
+  @apply p-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.feedback-prompt {
+  @apply p-4 bg-white border-t border-border flex flex-col items-center gap-3 animate-in slide-in-from-bottom-5;
+}
+
+.feedback-prompt p {
+  @apply text-sm font-semibold text-foreground;
+}
+
+.feedback-buttons {
+  @apply flex gap-4 w-full;
+}
+
+.feedback-btn {
+  @apply flex-1 py-2 rounded-lg border flex items-center justify-center gap-2 text-sm font-medium transition-all cursor-pointer hover:bg-slate-50;
+}
+
+.feedback-good {
+  @apply border-green-200 text-green-700 hover:bg-green-50;
+}
+
+.feedback-bad {
+  @apply border-red-200 text-red-700 hover:bg-red-50;
+}
+
+.chat-ended-message {
+  @apply p-6 bg-white border-t border-border flex flex-col items-center gap-4 text-center;
+}
+
+.chat-ended-message p {
+  @apply text-sm font-medium text-foreground;
+}
+
+.login-page {
+  @apply min-h-screen flex items-center justify-center px-4;
+}
+
+.login-card {
+  @apply w-full max-w-md bg-card border border-border p-8 rounded-2xl shadow-xl animate-in fade-in zoom-in-95 duration-300;
+}
+
+.login-header {
+  @apply flex flex-col items-center text-center mb-8;
+}
+
+.login-icon {
+  @apply text-primary mb-3;
+}
+
+.login-header h1 {
+  @apply text-2xl font-bold text-foreground;
+}
+
+.login-header p {
+  @apply text-sm text-muted-foreground mt-1;
+}
+
+.login-form {
+  @apply flex flex-col gap-5;
+}
+
+.quick-login-box {
+  @apply mb-5 p-4 rounded-2xl border border-border bg-gradient-to-br from-slate-50 to-white shadow-sm;
+}
+
+.quick-login-header {
+  @apply flex items-center justify-between gap-3 mb-3;
+}
+
+.quick-login-title {
+  @apply text-[11px] font-extrabold text-foreground/70 uppercase tracking-[0.22em];
+}
+
+.quick-login-badge {
+  @apply text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-primary/10 text-primary border border-primary/10;
+}
+
+.quick-login-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 gap-2;
+}
+
+.quick-login-btn {
+  @apply flex items-center justify-between gap-3 px-3.5 py-3 rounded-xl border border-border bg-white text-left text-sm font-semibold text-foreground/85 shadow-[0_1px_0_rgba(255,255,255,0.7)_inset] transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed;
+  box-shadow: 0 8px 24px oklch(0.15 0.02 240 / 0.04);
+}
+
+.quick-login-btn:hover {
+  transform: translateY(-1px);
+  border-color: oklch(0.55 0.18 250 / 0.28);
+  box-shadow: 0 12px 28px oklch(0.15 0.02 240 / 0.08);
+}
+
+.quick-login-btn:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-white;
+}
+
+.quick-login-btn-label {
+  @apply truncate;
+}
+
+.quick-login-btn-arrow {
+  @apply text-primary/70 transition-transform duration-200;
+}
+
+.quick-login-btn:hover .quick-login-btn-arrow {
+  transform: translateX(2px);
+}
+
+.quick-login-btn:hover .quick-login-btn-label {
+  color: oklch(0.22 0.03 240);
+}
+
+.login-error {
+  @apply p-3 rounded-lg bg-destructive/10 text-destructive text-sm font-medium;
+}
+
+.form-group {
+  @apply flex flex-col gap-1.5;
+}
+
+.form-group label {
+  @apply text-xs font-semibold text-foreground/80 uppercase tracking-wider;
+}
+
+.form-group input {
+  @apply px-4 py-2.5 rounded-lg border border-border bg-background text-sm focus:border-primary focus:ring-2 focus:ring-ring transition-all;
+}
+
+.login-submit {
+  @apply py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm hover:opacity-90 active:scale-98 transition-all cursor-pointer mt-2;
+}
+
+.dashboard-layout {
+  @apply min-h-screen flex flex-col bg-slate-50/50;
+}
+
+.dashboard-header {
+  @apply h-16 border-b border-border bg-white px-6 flex items-center justify-between shadow-sm shrink-0;
+}
+
+.dashboard-header-left {
+  @apply flex items-center gap-2 text-primary font-bold text-lg;
+}
+
+.dashboard-header-right {
+  @apply flex items-center gap-4;
+}
+
+.dashboard-user-name {
+  @apply text-sm font-medium text-foreground/80;
+}
+
+.dashboard-logout {
+  @apply flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border text-xs font-semibold text-muted-foreground hover:bg-slate-50 hover:text-foreground transition-all cursor-pointer;
+}
+
+.dashboard-content {
+  @apply flex-1 flex overflow-hidden;
+}
+
+.dashboard-sidebar {
+  @apply w-80 border-r border-border bg-white flex flex-col shrink-0;
+}
+
+.dashboard-main {
+  @apply flex-1 bg-slate-50/30 flex flex-col overflow-hidden;
+}
+
+.conversation-list {
+  @apply flex flex-col h-full overflow-y-auto p-4 gap-2;
+}
+
+.conversation-list-title {
+  @apply text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 px-2;
+}
+
+.conversation-list-empty {
+  @apply text-sm text-muted-foreground text-center py-8;
+}
+
+.conversation-item {
+  @apply w-full p-3.5 rounded-xl border border-border bg-white text-left transition-all hover:border-primary hover:shadow-sm cursor-pointer flex flex-col gap-1;
+}
+
+.conversation-item-active {
+  @apply border-primary bg-primary/5 shadow-sm ring-1 ring-primary;
+}
+
+.conversation-item-header {
+  @apply flex items-center justify-between gap-2;
+}
+
+.conversation-item-name {
+  @apply text-sm font-semibold text-foreground;
+}
+
+.conversation-status {
+  @apply text-[9px] uppercase font-extrabold tracking-wider px-2 py-0.5 rounded-full;
+}
+
+.conversation-status-waiting {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.conversation-status-active {
+  @apply bg-green-100 text-green-800;
+}
+
+.conversation-status-closed {
+  @apply bg-slate-100 text-slate-800;
+}
+
+.conversation-item-time {
+  @apply text-[10px] text-muted-foreground self-start;
+}
+
+.staff-chat-view {
+  @apply flex flex-col h-full overflow-hidden;
+}
+
+.staff-chat-header {
+  @apply p-4 border-b border-border bg-white shadow-sm flex items-center justify-between;
+}
+
+.staff-chat-header h3 {
+  @apply text-base font-bold text-foreground;
+}
+
+.staff-chat-query {
+  @apply text-xs text-muted-foreground mt-0.5;
+}
+
+.dashboard-empty {
+  @apply flex-1 flex flex-col items-center justify-center text-center p-8;
+}
+
+.empty-icon {
+  @apply text-muted-foreground/40 mb-4 animate-pulse;
+}
+
+.dashboard-empty h2 {
+  @apply text-lg font-bold text-foreground;
+}
+
+.dashboard-empty p {
+  @apply text-sm text-muted-foreground mt-1;
+}
+
+.admin-tabs {
+  @apply flex border-b border-border bg-white px-6 shrink-0;
+}
+
+.admin-tab {
+  @apply px-4 py-3 border-b-2 border-transparent text-sm font-semibold text-muted-foreground hover:text-foreground flex items-center gap-1.5 transition-all cursor-pointer;
+}
+
+.admin-tab-active {
+  @apply border-primary text-primary;
+}
+
+.admin-content {
+  @apply flex-1 overflow-y-auto p-6 max-w-7xl mx-auto w-full;
+}
+
+.staff-monitor {
+  @apply flex flex-col gap-6;
+}
+
+.section-title {
+  @apply text-lg font-bold text-foreground;
+}
+
+.staff-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+}
+
+.staff-card {
+  @apply p-5 rounded-2xl border border-border bg-card shadow-sm flex flex-col gap-2 relative overflow-hidden;
+}
+
+.staff-card-header {
+  @apply flex items-center gap-2;
+}
+
+.staff-status-dot {
+  @apply w-2.5 h-2.5 rounded-full;
+}
+
+.status-free {
+  @apply bg-green-500 text-green-700 border-green-200;
+}
+
+.status-busy {
+  @apply bg-yellow-500 text-yellow-700 border-yellow-200;
+}
+
+.status-offline {
+  @apply bg-slate-400 text-slate-700 border-slate-200;
+}
+
+.staff-card-name {
+  @apply font-semibold text-sm text-foreground;
+}
+
+.staff-card-email {
+  @apply text-xs text-muted-foreground;
+}
+
+.staff-card-badge {
+  @apply text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full w-fit mt-1;
+}
+
+.staff-card-badge.status-free {
+  @apply bg-green-50 text-green-700;
+}
+
+.staff-card-badge.status-busy {
+  @apply bg-yellow-50 text-yellow-700;
+}
+
+.staff-card-badge.status-offline {
+  @apply bg-slate-50 text-slate-600;
+}
+
+.feedback-section {
+  @apply flex flex-col gap-6;
+}
+
+.feedback-stats {
+  @apply flex gap-4;
+}
+
+.feedback-stat {
+  @apply px-4 py-3 rounded-xl border flex items-center gap-2 text-sm font-semibold;
+}
+
+.feedback-stat-good {
+  @apply border-green-200 bg-green-50/50 text-green-700;
+}
+
+.feedback-stat-bad {
+  @apply border-red-200 bg-red-50/50 text-red-700;
+}
+
+.feedback-table-wrapper {
+  @apply border border-border rounded-xl bg-white overflow-hidden shadow-sm;
+}
+
+.feedback-table {
+  @apply w-full border-collapse text-left text-sm;
+}
+
+.feedback-table th {
+  @apply bg-slate-50 px-4 py-3 font-semibold text-muted-foreground border-b border-border;
+}
+
+.feedback-table td {
+  @apply px-4 py-3.5 border-b border-border/80;
+}
+
+.rating-badge {
+  @apply flex items-center gap-1 w-fit text-xs font-semibold px-2 py-0.5 rounded-full capitalize;
+}
+
+.rating-good {
+  @apply bg-green-100 text-green-800;
+}
+
+.rating-bad {
+  @apply bg-red-100 text-red-800;
+}
+
+.empty-state {
+  @apply text-center text-sm text-muted-foreground py-8;
+}
+
+.queue-badge {
+  @apply text-xs font-bold bg-primary/10 text-primary px-2.5 py-1 rounded-full;
+}
+
+.admin-conversations {
+  @apply flex flex-col gap-6;
+}
+
+.view-messages-btn {
+  @apply text-xs font-bold text-primary hover:underline cursor-pointer;
+}
+
+.admin-messages-panel {
+  @apply mt-6 border border-border rounded-xl bg-white p-5 flex flex-col gap-4 shadow-md max-w-2xl animate-in slide-in-from-bottom-5;
+}
+
+.admin-messages-header {
+  @apply flex items-center justify-between border-b border-border pb-3;
+}
+
+.admin-messages-header h4 {
+  @apply font-bold text-foreground;
+}
+
+.close-messages-btn {
+  @apply text-xs font-semibold text-muted-foreground hover:text-foreground cursor-pointer;
+}
+
+.admin-messages-list {
+  @apply flex flex-col gap-3 max-h-80 overflow-y-auto p-2 bg-slate-50/30 rounded-lg;
+}
+
+.admin-message {
+  @apply max-w-[85%] p-3 rounded-xl flex flex-col gap-0.5 text-xs;
+}
+
+.admin-message-customer {
+  @apply self-end bg-primary/10 text-foreground rounded-tr-none;
+}
+
+.admin-message-staff {
+  @apply self-start bg-white border border-border rounded-tl-none shadow-sm;
+}
+
+.admin-message-system {
+  @apply self-center bg-transparent text-muted-foreground text-[10px] text-center border-none shadow-none;
+}
+
+.admin-message-sender {
+  @apply text-[9px] font-bold uppercase tracking-wider opacity-60 mb-0.5;
+}
+
+.admin-message-time {
+  @apply text-[8px] opacity-60 self-end mt-0.5;
+}
+
+.landing-page {
+  @apply min-h-screen flex items-center justify-center px-6;
+}
+
+.landing-hero {
+  @apply text-center max-w-2xl flex flex-col items-center gap-6 animate-in fade-in slide-in-from-bottom-6 duration-500;
+}
+
+.landing-hero-icon {
+  @apply w-16 h-16 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center shadow-lg;
+}
+
+.landing-title {
+  @apply text-4xl md:text-5xl font-extrabold text-foreground tracking-tight;
+}
+
+.landing-subtitle {
+  @apply text-base md:text-lg text-muted-foreground max-w-lg leading-relaxed;
+}
+
+.landing-features {
+  @apply flex flex-col md:flex-row gap-6 mt-8 text-left w-full;
+}
+
+.landing-feature {
+  @apply flex-1 p-5 rounded-xl border border-border bg-card shadow-sm flex flex-col gap-3;
+}
+
+.feature-number {
+  @apply w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center font-bold text-sm;
+}
+
+.landing-feature span:last-child {
+  @apply text-sm font-medium text-foreground/80;
+}
+
+.loading-screen {
+  @apply min-h-screen flex items-center justify-center;
+}
+
+.loading-spinner {
+  @apply w-8 h-8 rounded-full border-3 border-muted border-t-primary animate-spin;
+}
