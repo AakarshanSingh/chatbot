@@ -43,12 +43,6 @@ ACCESS_TOKEN_EXPIRE_MINUTES=480
 CORS_ORIGINS=http://localhost:3000
 ```
 
-Run the database seed once if you want the demo users:
-
-```bash
-uv run python seed.py
-```
-
 Start the backend server:
 
 ```bash
@@ -56,6 +50,13 @@ uv run uvicorn main:combined_app --host 0.0.0.0 --port 8000 --reload
 ```
 
 The API will be available at `http://localhost:8000`.
+
+After the server is running, run the database seed once if you want the demo users:
+
+```bash
+cd server
+uv run python seed.py
+```
 
 ## Step 3: Set up the frontend
 
