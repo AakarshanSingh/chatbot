@@ -8,7 +8,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
 from app.database import engine, Base
-from app.models.connection_event import ConnectionEvent  # noqa: F401
 from app.services.redis_service import redis_service
 from app.routers import auth, admin, staff
 from app.websocket.handlers import register_handlers
